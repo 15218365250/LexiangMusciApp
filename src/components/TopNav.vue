@@ -1,9 +1,9 @@
 <template>
   <div class="box">
-    <div class="logoPg">
+    <router-link class="logoPg" to="/search">
       <span></span>
-      <input type="text" />
-    </div>
+      <p>想要更好的Muisc请下载网易云App</p>
+    </router-link>
     <div class="nav">
       <ul class="topnav">
         <li><router-link tag="a" to="/">推荐音乐</router-link></li>
@@ -29,6 +29,7 @@ export default {
 }
 .logoPg {
   display: flex;
+  text-decoration: none;
   background-color: #242424;
   padding: 10px;
   text-align: center;
@@ -40,10 +41,12 @@ export default {
     background: url("../assets/img/topbar.png") no-repeat 3px -7px;
     background-size: 120px 120px;
   }
-  input {
+  p {
     flex: 1;
     display: inline-block;
-    outline: none;
+    color: rgb(111, 114, 114);
+    background: rgb(58, 57, 57);
+    border-radius: 5px;
   }
 }
 .topnav {

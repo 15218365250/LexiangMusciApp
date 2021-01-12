@@ -9,8 +9,9 @@ import axios from "axios";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let config = {//axios的配置
-  // baseURL:"http://musicapi.leanapp.cn/"//设置请求域名 接口版本 v1 v2
-  baseURL:"http://music.kele8.cn/"//设置请求域名 接口版本 v1 v2
+  // baseURL: "http://musicapi.leanapp.cn/",//设置请求域名 接口版本 v1 v2
+  baseURL: "http://127.0.0.1:9090/",//设置请求域名 接口版本 v1 v2
+  // baseURL:"http://music.kele8.cn/"//设置请求域名 接口版本 v1 v2
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
@@ -19,12 +20,19 @@ let config = {//axios的配置
 const _axios = axios.create(config);//根据配置创建axios实例
 //axios 请求的前置配置
 _axios.interceptors.request.use(
-  function(config) {
+  function (config) {
     // Do something before request is sent
     // config.headers.asccessToken='hellotaken';//在请求头添加标记
+    // if (config.url.indexOf('http') != 0) {
+    //   if (config.url.indexOf("?") != -1) {
+    //     config.url += '&proxy=http://117.69.12.117:9999';
+    //   }
+    // } else {
+    //   config.url += '?proxy=http://117.69.12.117:9999';
+    // }
     return config;
   },
-  function(error) {
+  function (error) {
     // Do something with request error
     return Promise.reject(error);
   }
@@ -32,17 +40,18 @@ _axios.interceptors.request.use(
 //axios 请求之后后置配置
 // Add a response interceptor
 _axios.interceptors.response.use(
-  function(response) {
+  function (response) {
     // Do something with response data
+
     return response;
   },
-  function(error) {
+  function (error) {
     // Do something with response error
     return Promise.reject(error);
   }
 );
 //把 axios做成 Vue 插件
-Plugin.install = function(Vue) {
+Plugin.install = function (Vue) {
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {
@@ -56,8 +65,8 @@ Plugin.install = function(Vue) {
         return _axios;
       }
     },
-    $http:{
-      get(){
+    $http: {
+      get() {
         return _axios;
       }
     }

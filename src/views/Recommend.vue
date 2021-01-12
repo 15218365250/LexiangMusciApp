@@ -5,7 +5,7 @@
       <router-link
         v-for="rem in recommendMusicList"
         :key="rem.id"
-        to="/"
+        :to="`/playlist/${rem.id}`"
         tag="li"
       >
         <div>
@@ -15,6 +15,7 @@
         <p>{{ rem.name }}</p>
       </router-link>
     </ul>
+    <Loading v-if="recommendMusicList.length <=0"></Loading>
     <Title>最新音乐</Title>
     <MusicItem :newMusicList="newMusicList"></MusicItem>
   </div>
@@ -22,17 +23,19 @@
 
 <script>
 import Title from "../components/Title";
-import MusicItem from '../components/MusicItem'
+import MusicItem from '../components/MusicItem';
+import Loading from '../components/Loading'
 export default {
   name: "Recommend",
   components: {
     Title,
-    MusicItem
+    MusicItem,
+    Loading
   },
   data() {
     return {
       recommendMusicList: [],
-      newMusicList:[]
+      newMusicList:[],
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -40,11 +43,11 @@ export default {
     next((vm) => {
       vm.$http("/personalized?limit=6").then((data) => {
         vm.recommendMusicList = data.data.result;
-      });
+        // console.log(vm.recommendMusicList);
+      }).catch(console.error());
       vm.$http('/personalized/newsong').then(data=>{
-        console.log(data);
         vm.newMusicList = data.data.result;
-      })
+      }).catch(console.error());
     });
   },
   filters: {
@@ -71,7 +74,6 @@ ul.recommendList {
         position: absolute;
         right: 5px;
         top: 2px;
-        z-index: 3;
         padding-left: 13px;
         color: #fff;
         font-size: 12px;

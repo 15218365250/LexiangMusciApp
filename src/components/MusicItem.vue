@@ -1,24 +1,38 @@
 <template>
-  <ul class="newMuiscList">
-    <router-link to="/" tag="li" v-for="rem in newMusicList" :key="rem.id">
-      <div class="left">
-        <div class="musicName">{{ rem.name }}</div>
-        <div class="musicMassage">
-          <span v-show="rem.song.privilege.maxbr > 320000"></span>
-          {{ rem.song.artists[0].name }}-{{ rem.name }}
+  <div>
+    <ul class="newMuiscList">
+      <li to="/"  v-for="rem in newMusicList" :key="rem.id" @click="play(rem.id)">
+        <div class="left">
+          <div class="musicName">{{ rem.name }}</div>
+          <div class="musicMassage">
+            <span v-show="rem.song.privilege.maxbr > 320000"></span>
+            {{ rem.song.artists[0].name }}-{{ rem.name }}
+          </div>
         </div>
-      </div>
-      <div class="right">
-        <span></span>
-      </div>
-    </router-link>
-  </ul>
+        <div class="right">
+          <span ></span> 
+        </div>
+      </li>
+    </ul>
+    <Loading v-show="turff == 1" />
+  </div>
 </template>
 <script>
+import Loading from "./Loading";
 export default {
   name: "MusicItem",
   props: {
     newMusicList: Array,
+    turff: Number,
+  },
+  methods: {
+    play(id){
+      this.$root.playingMusic.musicID =id;
+      this.$root.playingMusic.outplay = true;
+    }
+  },
+  components: {
+    Loading,
   },
 };
 </script>
@@ -28,18 +42,25 @@ ul.newMuiscList {
   padding-left: 10px;
   li {
     display: flex;
-    padding: 6px 0px;
+    padding: 10px 0px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     div.left {
       flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      word-break: normal;
       .musicName {
         font-size: 17px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; //想要的行数
+        -webkit-box-orient: vertical;
       }
       .musicMassage {
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; //想要的行数
+        -webkit-box-orient: vertical;
         color: #888;
         span {
           display: inline-block;
