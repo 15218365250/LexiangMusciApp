@@ -8,6 +8,7 @@
     </div>
     <!-- <MusicItem :newMusicList="hotMusicid"></MusicItem> -->
     <!-- 加载歌曲列表 -->
+    <div class="mulis">歌曲列表</div>
     <div>
       <ul class="newMuiscList">
         <li v-for="(v, k) in hotMusicid" :key="v.id" @click="play(v.id)">
@@ -32,6 +33,7 @@
     <div @click="appList(20)" class="addMuch">{{ mltext }}</div>
     <!-- 加载错误显示动画 -->
     <Loading v-if="hotMusicid.length <= 0"></Loading>
+    <div class="kong"></div>
   </div>
 </template>
 <script>
@@ -81,10 +83,16 @@ export default {
         vm.mltext = "已显示全部歌曲";
       }
     },
-    play(id){
+    play(id) {
+      let musicId = [];
       this.$root.playingMusic.musicID = id;
       this.$root.playingMusic.outplay = true;
-    }
+      for (let i = 0; i < this.hotMusicid.length; i++) {
+        musicId.push(this.hotMusicid[i].id);
+      }
+      (this.$root.playingMusic.playingList = []),
+        (this.$root.playingMusic.playingList = musicId);
+    },
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
@@ -104,8 +112,9 @@ export default {
           vm.appList();
           // 更新日期
           vm.updataTime = data.data.playlist.updateTime;
-        }).catch(console.error());
-        vm.toffo = false;
+        })
+        .catch(console.error());
+      vm.toffo = false;
     });
   },
   filters: {
@@ -126,6 +135,7 @@ export default {
     background: url("../assets/img/hot_music_bg_2x.jpg") no-repeat;
     background-size: contain;
     position: relative;
+    border-bottom: 1px solid rgb(70, 69, 69);
     .conte {
       position: absolute;
       top: 0;
@@ -149,6 +159,16 @@ export default {
         margin-top: 10px;
       }
     }
+  }
+  .mulis {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    margin: 5px 0;
+    padding: 0px 10px;
+    background-color: rgb(214, 212, 212);
+    border-left: 3px solid rgb(214, 42, 42);
+    color: rgb(255, 255, 255);
   }
   ul.newMuiscList {
     // display:flex;
@@ -214,6 +234,10 @@ export default {
     text-align: center;
     background-color: rgb(214, 42, 42);
     color: azure;
+  }
+  .kong {
+    width: 100%;
+    height: 50px;
   }
 }
 </style>

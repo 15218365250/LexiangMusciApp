@@ -2,7 +2,7 @@
   <div class="box">
     <router-link class="logoPg" to="/search">
       <span></span>
-      <p>想要更好的Muisc请下载网易云App</p>
+      <div><p>下载App</p></div>
     </router-link>
     <div class="nav">
       <ul class="topnav">
@@ -25,28 +25,36 @@ export default {
 .box {
   position: sticky;
   top: 0;
-  z-index: 100;
+  background-color: #fff;
+  z-index: 50;
 }
 .logoPg {
   display: flex;
   text-decoration: none;
-  background-color: #242424;
+  background-color: #3b3939;
   padding: 10px;
   text-align: center;
   span {
     display: inline-block;
-    width: 85px;
-    height: 25px;
+    width: 120px;
+    height: 40px;
     margin-right: 5px;
     background: url("../assets/img/topbar.png") no-repeat 3px -7px;
-    background-size: 120px 120px;
+    background-size: 170px 170px;
   }
-  p {
+  div {
     flex: 1;
     display: inline-block;
-    color: rgb(111, 114, 114);
-    background: rgb(58, 57, 57);
-    border-radius: 5px;
+    line-height: 40px;
+    p {
+      float: right;
+      font-size: 6px;
+      color: rgb(238, 237, 237);
+      border-radius: 5px;
+      padding: 0 5px;
+      background-color: rgb(197, 5, 5);
+      text-align: right;
+    }
   }
 }
 .topnav {

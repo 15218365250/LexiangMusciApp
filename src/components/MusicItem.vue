@@ -14,6 +14,7 @@
         </div>
       </li>
     </ul>
+    <div class="kong"></div>
     <Loading v-show="turff == 1" />
   </div>
 </template>
@@ -29,6 +30,13 @@ export default {
     play(id){
       this.$root.playingMusic.musicID =id;
       this.$root.playingMusic.outplay = true;
+
+      // 循环音乐数据获取对应列表全部id
+      let allMusicId = [];
+      for(let i=0;i<this.newMusicList.length;i++){
+        allMusicId.push(this.newMusicList[i].id);
+      }
+      this.$root.playingMusic.playingList = allMusicId;
     }
   },
   components: {
@@ -36,7 +44,7 @@ export default {
   },
 };
 </script>
-<style lang="less" scope>
+<style lang="less" scoped>
 ul.newMuiscList {
   // display:flex;
   padding-left: 10px;

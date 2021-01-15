@@ -6,6 +6,7 @@
                 {{s|filtType}}{{s.name}}
             </li>
         </ul>
+        <div class="kong"></div>
     </div>
 </template>
 <script>

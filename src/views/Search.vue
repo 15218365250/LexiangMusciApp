@@ -79,6 +79,7 @@ export default {
         if (keyWord == "") {
           this.suggets = [];
           this.searAllchList = [];
+          this.showSuggets = true;
         }
       });
     },
@@ -95,6 +96,11 @@ export default {
         vm.hotsList = data.data.result.hots;
       })
     })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.keyword = '';
+    this.showSuggets = true;
+    next()
   }
 };
 </script>

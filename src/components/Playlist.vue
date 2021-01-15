@@ -36,6 +36,7 @@
           </div>
         </li>
       </ul>
+      <div class="kong"></div>
     </div>
     <h3>精彩评论</h3>
     <Comment :commentData="commentData"></Comment>
@@ -67,6 +68,13 @@ export default {
       //   console.log(val)
       this.$root.playingMusic.musicID = val;
       this.$root.playingMusic.outplay = true;
+      console.log(this.newMusicList);
+      let musicId = [];
+      this.$root.playingMusic.playingList = [];
+      for(let i=0;i<this.newMusicList.length;i++){
+        musicId.push(this.newMusicList[i].id);
+      }
+      this.$root.playingMusic.playingList = musicId;
     },
   },
   beforeRouteEnter(from, to, next) {
@@ -108,7 +116,7 @@ export default {
   },
 };
 </script>
-<style lang="less" scope>
+<style lang="less" scoped>
 .hearBg {
   display: flex;
   position: relative;
@@ -182,6 +190,7 @@ h3 {
   display: block;
   margin-top: 5px;
   padding: 5px 10px;
+  background-color: rgb(240, 239, 239);
   border-left: 4px solid rgb(190, 8, 8);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -224,6 +233,10 @@ h3 {
               background-size: 166px 97px;
             }
           }
+        }
+        .kong{
+          width: 100%;
+          height: 50px;
         }
       }
       div.right {

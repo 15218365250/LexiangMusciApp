@@ -18,6 +18,7 @@
     <Loading v-if="recommendMusicList.length <=0"></Loading>
     <Title>最新音乐</Title>
     <MusicItem :newMusicList="newMusicList"></MusicItem>
+    <div class="muchover" v-show="newMusicList.length >0">下载App获取更多内容......</div>
   </div>
 </template>
 
@@ -101,5 +102,15 @@ ul.recommendList {
       font-size: 13px;
     }
   }
+}
+.muchover{
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  background-color: rgb(65, 64, 64);
+  color: rgb(190, 184, 184);
+  font-weight: 700;
+  box-shadow: 1px -2px 15px 8px;
+  // letter-spacing: 5px;
 }
 </style>

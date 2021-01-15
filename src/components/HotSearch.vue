@@ -17,7 +17,7 @@ export default {
   },
 };
 </script>
-<style lang="less" scope>
+<style lang="less" scoped>
 .wordList {
   margin: 15px 5px;
   color: gray;
